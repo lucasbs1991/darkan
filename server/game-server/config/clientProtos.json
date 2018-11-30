@@ -1,0 +1,26 @@
+{
+  "chat.chatHandler.move": {
+    "required string rid": 1,
+    "required string posx": 2,
+    "required string posy": 3,
+    "required string dir": 4,
+    "required string from": 5,
+    "required string target": 6
+  },
+
+  "chat.chatHandler.send": {
+    "required string rid": 1,
+    "required string content": 2,
+    "required string from": 3,
+    "required string target": 4
+  },
+
+  "connector.entryHandler.enter": {
+    "required string username": 1,
+    "required string rid": 2
+  },
+
+  "gate.gateHandler.queryEntry": {
+    "required string uid": 1
+  }
+}
