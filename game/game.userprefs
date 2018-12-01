@@ -1,16 +1,20 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/Game/PlayerBehaviour.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/Game.cs">
     <Files>
-      <File FileName="Assets/scripts/LoginGUI.cs" Line="20" Column="23" />
-      <File FileName="Assets/scripts/Game.cs" Line="74" Column="2" />
-      <File FileName="Assets/scripts/ChatGUI.cs" Line="193" Column="52" />
-      <File FileName="Assets/scripts/Game/PlayerBehaviour.cs" Line="35" Column="20" />
-      <File FileName="Assets/scripts/client/PomeloClient.cs" Line="191" Column="25" />
+      <File FileName="Assets/scripts/LoginGUI.cs" Line="18" Column="31" />
+      <File FileName="Assets/scripts/Game.cs" Line="76" Column="63" />
+      <File FileName="Assets/scripts/ChatGUI.cs" Line="1" Column="1" />
+      <File FileName="Assets/scripts/client/PomeloClient.cs" Line="1" Column="1" />
       <File FileName="Assets/scripts/SimpleJSON/SimpleJSON.cs" Line="1" Column="1" />
       <File FileName="Assets/scripts/protocol/MessageProtocol.cs" Line="1" Column="1" />
       <File FileName="Assets/scripts/protocol/Protocol.cs" Line="1" Column="1" />
       <File FileName="Assets/scripts/client/EventManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/scripts/Game/PlayerBehaviour.cs" Line="33" Column="28" />
+      <File FileName="../../v0/Assets/Scripts/PlayerBehaviour.cs" Line="31" Column="3" />
+      <File FileName="../../v0.8.8.6/Assets/Scripts/PlayerBehaviour.cs" Line="75" Column="21" />
+      <File FileName="Assets/scripts/Game/OtherPlayer.cs" Line="14" Column="36" />
+      <File FileName="Assets/scripts/Game/Feedback.cs" Line="17" Column="28" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
