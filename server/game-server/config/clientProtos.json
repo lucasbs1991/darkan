@@ -1,11 +1,20 @@
 {
-  "chat.chatHandler.move": {
+  "area.areaHandler.enterArea": {
+  	"required string area": 1
+  },
+
+  "area.areaHandler.enterScene": {
+  	"required string area": 1
+  },
+
+  "area.areaHandler.move": {
     "required string rid": 1,
     "required string posx": 2,
     "required string posy": 3,
     "required string dir": 4,
     "required string from": 5,
-    "required string target": 6
+    "required string target": 6,
+    "required string area": 7
   },
 
   "chat.chatHandler.send": {
@@ -17,7 +26,8 @@
 
   "connector.entryHandler.enter": {
     "required string username": 1,
-    "required string rid": 2
+    "required string rid": 2,
+    "required string areaServer": 3
   },
 
   "gate.gateHandler.queryEntry": {

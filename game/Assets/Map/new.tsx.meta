@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: d5dcb3b6c98324263a9394ebc2d91503
+ScriptedImporter:
+  fileIDToRecycleName:
+    2800000: Atlas_new_1
+    11400000: _TilesetScriptObject
+    11400002: _superAsset
+    11400004: Tile_new_2
+    11400006: Tile_new_3
+    21300000: Sprite_new_2
+    21300002: Sprite_new_3
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: cc34d0f3dc257a442819830b408c5322, type: 3}
+  errors: []
+  warnings: []
+  missingSortingLayers: []
+  missingLayers: []
+  pixelsPerUnit: 16
+  edgesPerEllipse: 32
+  useSpriteAtlas: 1
+  atlasWidth: 2048
+  atlasHeight: 2048

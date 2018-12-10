@@ -17,7 +17,7 @@ public class PlayerBehaviour : MonoBehaviour {
 	public float speed = 1.4f;
 	public bool moving = false;
 
-	private string lastDir;
+	private string lastDir, area = "cave";
 	private bool dead = false;
 	private Vector3 dir, toPos;
 
@@ -37,7 +37,7 @@ public class PlayerBehaviour : MonoBehaviour {
 		// another player moved
 		pclient.on("onMove", (data)=> {
 			updatePlayerPos(data);
-		});	
+		});
 	}
 
 	// update position from others
@@ -93,8 +93,8 @@ public class PlayerBehaviour : MonoBehaviour {
 			toPos += dir;
 			SetAnim ("Side");
 
-			if (!spriteRenderer.flipX)
-				spriteRenderer.flipX = true;
+			if (spriteRenderer.flipX)
+				spriteRenderer.flipX = false;
 
 			lastDir = "right";
 			//network.OnPlayerMove ("right");
@@ -113,8 +113,8 @@ public class PlayerBehaviour : MonoBehaviour {
 			toPos += dir;
 			SetAnim ("Side");
 
-			if (spriteRenderer.flipX)
-				spriteRenderer.flipX = false;
+			if (!spriteRenderer.flipX)
+				spriteRenderer.flipX = true;
 			
 			lastDir = "left";
 			//network.OnPlayerMove ("left");
@@ -160,7 +160,7 @@ public class PlayerBehaviour : MonoBehaviour {
 		}
 
 		// send to server
-		SendPosition ("*", transform.position.x.ToString (), transform.position.y.ToString (), lastDir);
+		SendPosition (area, transform.position.x.ToString (), transform.position.y.ToString (), lastDir);
 
 		StartCoroutine (Moving ());
 	}
@@ -213,9 +213,29 @@ public class PlayerBehaviour : MonoBehaviour {
 		message.Add("dir", lastdir);
 		message.Add("from", LoginGUI.userName);
 		message.Add("target", target);
+		message.Add("area", area);
 
-		pclient.request("chat.chatHandler.move", message, (data) => {
+		pclient.request("area.areaHandler.move", message, (data) => {
 			
 		});
+	}
+
+	public void changeChannel(string newChannel){
+		area = newChannel;
+
+		JsonObject message = new JsonObject();
+		message.Add("area", area);
+
+		pclient.notify("area.areaHandler.enterScene", message);
+	}
+
+	public void changeArea(string newArea){
+		area = newArea;
+		LoginGUI.areaServer = area;
+
+		JsonObject message = new JsonObject();
+		message.Add("area", area);
+
+		pclient.notify("area.areaHandler.enterArea", message);
 	}
 }

@@ -19,7 +19,8 @@ var handler = Handler.prototype;
 handler.enter = function(msg, session, next) {
 	var self = this;
 	var rid = msg.rid;
-	var uid = msg.username + '*' + rid
+	// var uid = msg.username + '*' + rid;
+	var uid = msg.username + '*global';
 	var sessionService = self.app.get('sessionService');
 
 	//duplicate log in
@@ -31,14 +32,21 @@ handler.enter = function(msg, session, next) {
 		return;
 	}
 
+	console.log(self.app.get('areaIdMap'));
+	console.log(msg.areaServer);
 	session.bind(uid);
+	session.set('serverId', self.app.get('areaIdMap')[msg.areaServer]); // player.areaId
 	session.set('rid', rid);
-	session.push('rid', function(err) {
-		if(err) {
-			console.error('set rid for session service failed! error is : %j', err.stack);
-		}
-	});
+	session.set('uid', uid);
+	session.set('playername', msg.username);
+	// session.push('rid', function(err) {
+	// 	if(err) {
+	// 		console.error('set rid for session service failed! error is : %j', err.stack);
+	// 	}
+	// });
 	session.on('closed', onUserLeave.bind(null, self.app));
+	session.pushAll();
+	console.log(session);
 
 	//put user into channel
 	self.app.rpc.chat.chatRemote.add(session, uid, self.app.get('serverId'), rid, true, function(users){
@@ -59,5 +67,8 @@ var onUserLeave = function(app, session) {
 	if(!session || !session.uid) {
 		return;
 	}
+
+	app.rpc.area.areaRemote.playerLeave(session, session.uid, app.get('serverId'), session.get('rid'), null);
+
 	app.rpc.chat.chatRemote.kick(session, session.uid, app.get('serverId'), session.get('rid'), null);
 };
