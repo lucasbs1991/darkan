@@ -240,4 +240,3 @@ a608efbc3b29ec8f9e3b35f2ae5d331c Assembly-CSharp-firstpass.dll:UnityStandardAsse
 382b8ef512fa8d6108723a01b57af65b UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsEventTracker
 d22c788799ee45d8676254eccf20e8b8 UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsTracker
 ec67701795fc4db402a5599ad6701f0c Assembly-CSharp.dll:.Teleport
-5d1905a9371eeca38b57b20d5b0bb0ee Assembly-CSharp.dll:.Area

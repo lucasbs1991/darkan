@@ -5,6 +5,7 @@ using SimpleJson;
 using Pomelo.DotNetClient;
 using CnControls;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerBehaviour : MonoBehaviour {
 
@@ -17,7 +18,7 @@ public class PlayerBehaviour : MonoBehaviour {
 	public float speed = 1.4f;
 	public bool moving = false;
 
-	private string lastDir, area = "cave";
+	private string lastDir, area = "1";
 	private bool dead = false;
 	private Vector3 dir, toPos;
 
@@ -213,7 +214,6 @@ public class PlayerBehaviour : MonoBehaviour {
 		message.Add("dir", lastdir);
 		message.Add("from", LoginGUI.userName);
 		message.Add("target", target);
-		message.Add("area", area);
 
 		pclient.request("area.areaHandler.move", message, (data) => {
 			
@@ -222,20 +222,13 @@ public class PlayerBehaviour : MonoBehaviour {
 
 	public void changeChannel(string newChannel){
 		area = newChannel;
+		LoginGUI.channel = newChannel;
 
 		JsonObject message = new JsonObject();
 		message.Add("area", area);
 
-		pclient.notify("area.areaHandler.enterScene", message);
-	}
+		//pclient.notify("area.areaHandler.enterScene", message);
 
-	public void changeArea(string newArea){
-		area = newArea;
-		LoginGUI.areaServer = area;
-
-		JsonObject message = new JsonObject();
-		message.Add("area", area);
-
-		pclient.notify("area.areaHandler.enterArea", message);
+		SceneManager.LoadScene (int.Parse(area));
 	}
 }

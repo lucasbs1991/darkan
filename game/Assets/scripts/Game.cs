@@ -24,7 +24,7 @@ public class Game : MonoBehaviour
 	void Start() 
 	{
 		JsonObject message = new JsonObject();
-		message.Add("area", "cave");
+		message.Add("area", LoginGUI.channel);
 		pclient.notify("area.areaHandler.enterScene", message);
 
 		player = Resources.Load ("Player") as GameObject;
@@ -89,11 +89,6 @@ public class Game : MonoBehaviour
 	}
 
 	public IEnumerator DestroyPlayer(string user) {
-		if(LoginGUI.userName == user){
-			pclient.disconnect();
-			Login();
-		}
-
 		Destroy (GameObject.Find (user));
 		yield return null;
 	}
@@ -106,11 +101,6 @@ public class Game : MonoBehaviour
 			}
 			Application.Quit();
 		}
-
-		if (connected) {
-			connected = false;
-			SceneManager.LoadScene (int.Parse(LoginGUI.areaServer));
-		}
 	}
 
 	//When quit, release resource
@@ -118,74 +108,6 @@ public class Game : MonoBehaviour
 		if (pclient != null) {
 			pclient.disconnect();
 		}
-	}
-
-
-
-
-	public void Login() {
-		int port = 3014;
-
-		LoginGUI.pc = new PomeloClient();
-
-		LoginGUI.pc.NetWorkStateChangedEvent += (state) =>
-		{
-			Debug.Log(state);
-		};
-			
-		LoginGUI.pc.initClient(LoginGUI.hostStatic, port, () =>
-		{
-			LoginGUI.pc.connect(null, data =>
-			{
-				Debug.Log("on data back");
-				Debug.Log(data.ToString());
-				JsonObject msg = new JsonObject();
-				msg["uid"] = LoginGUI.userName;
-				LoginGUI.pc.request("gate.gateHandler.queryEntry", msg, OnQuery);
-			});
-		});
-	}
-	
-	public static void OnQuery(JsonObject result)
-	{
-		if (Convert.ToInt32(result["code"]) == 200)
-		{
-			LoginGUI.pc.disconnect();
-
-			string host = (string)result["host"];
-			int port = Convert.ToInt32(result["port"]);
-			LoginGUI.pc = new PomeloClient();
-
-			LoginGUI.pc.NetWorkStateChangedEvent += (state) =>
-			{
-				Debug.Log(state);
-			};
-
-			LoginGUI.pc.initClient(host, port, () =>
-			{
-				LoginGUI.pc.connect(null, (data) =>
-				{
-					Debug.Log("on connect to connector!");
-
-					//Login
-					JsonObject msg = new JsonObject();
-					msg["username"] = LoginGUI.userName;
-					msg["rid"] = LoginGUI.channel;
-					msg["areaServer"] = LoginGUI.areaServer;
-
-					LoginGUI.pc.request("connector.entryHandler.enter", msg, OnEnter);
-				});
-			});
-		}
-	}
-
-	public static void OnEnter(JsonObject result)
-	{
-		Console.WriteLine("on login " + result.ToString());
-		Debug.Log("on login " + result.ToString());
-
-		LoginGUI.users = result;
-		connected = true;
 	}
 }
 

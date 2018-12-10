@@ -13,8 +13,7 @@ public class LoginGUI : MonoBehaviour {
 	public static bool connected = false;
 
 	public static string userName = "";
-	public static string channel = "cave";
-	public static string areaServer = "1";
+	public static string channel = "1";
 	public static JsonObject users = null;
 	
 	public static PomeloClient pc = null;
@@ -97,7 +96,6 @@ public class LoginGUI : MonoBehaviour {
 					JsonObject msg = new JsonObject();
 					msg["username"] = userName;
 					msg["rid"] = channel;
-					msg["areaServer"] = "1";
 
 					pc.request("connector.entryHandler.enter", msg, OnEnter);
 				});

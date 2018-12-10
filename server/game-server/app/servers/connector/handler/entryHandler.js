@@ -19,8 +19,8 @@ var handler = Handler.prototype;
 handler.enter = function(msg, session, next) {
 	var self = this;
 	var rid = msg.rid;
-	// var uid = msg.username + '*' + rid;
-	var uid = msg.username + '*global';
+	var uid = msg.username + '*' + rid;
+	//var uid = msg.username + '*global';
 	var sessionService = self.app.get('sessionService');
 
 	//duplicate log in
@@ -32,21 +32,13 @@ handler.enter = function(msg, session, next) {
 		return;
 	}
 
-	console.log(self.app.get('areaIdMap'));
-	console.log(msg.areaServer);
 	session.bind(uid);
-	session.set('serverId', self.app.get('areaIdMap')[msg.areaServer]); // player.areaId
+	//session.set('serverId', self.app.get('areaIdMap')['1']); // player.areaId
 	session.set('rid', rid);
 	session.set('uid', uid);
 	session.set('playername', msg.username);
-	// session.push('rid', function(err) {
-	// 	if(err) {
-	// 		console.error('set rid for session service failed! error is : %j', err.stack);
-	// 	}
-	// });
 	session.on('closed', onUserLeave.bind(null, self.app));
 	session.pushAll();
-	console.log(session);
 
 	//put user into channel
 	self.app.rpc.chat.chatRemote.add(session, uid, self.app.get('serverId'), rid, true, function(users){

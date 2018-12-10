@@ -17,21 +17,13 @@ var ChatRemote = function(app) {
  *
  */
 ChatRemote.prototype.add = function(uid, sid, name, flag, cb) {
-	console.log(name);
-	var channel = this.channelService.getChannel('global', flag);
-	var username = uid.split('*')[0];
-	var param = {
-		route: 'onAdd',
-		user: username
-		// TODO - send other player stats here
-	};
-	channel.pushMessage(param);
+	var channel = this.channelService.getChannel(name, flag);
 
 	if( !! channel) {
 		channel.add(uid, sid);
 	}
 
-	cb(this.get('global', flag));
+	cb(this.get(name, flag));
 };
 
 /**

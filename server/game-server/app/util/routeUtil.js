@@ -2,14 +2,16 @@ var exp = module.exports;
 var dispatcher = require('./dispatcher');
 
 exp.area = function(session, msg, app, cb) {
-	var serverId = session.get('serverId');
+	var areaServers = app.getServersByType('area');
 
-	if(!serverId) {
-		cb(new Error('can not find server info for type: ' + msg.serverType));
+	if(!areaServers || areaServers.length === 0) {
+		cb(new Error('can not find area servers.'));
 		return;
 	}
 
-	cb(null, serverId);
+	var res = dispatcher.dispatch(session.get('rid'), areaServers);
+
+	cb(null, res.id);
 };
 
 exp.chat = function(session, msg, app, cb) {
