@@ -5,5 +5,8 @@
   "dependencies": {
     "crc": "0.2.0",
     "pomelo": "2.2.x"
+  },
+  "scripts": {
+    "start": "pomelo start",
   }
 }
