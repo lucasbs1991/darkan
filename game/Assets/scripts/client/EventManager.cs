@@ -53,6 +53,11 @@ namespace Pomelo.DotNetClient
             }
         }
 
+        public void RemoveOnEvent()
+        {
+            this.eventMap = new Dictionary<string, List<Action<JsonObject>>>();
+        }
+
         /// <summary>
         /// If the event exists,invoke the event when server return messge.
         /// </summary>

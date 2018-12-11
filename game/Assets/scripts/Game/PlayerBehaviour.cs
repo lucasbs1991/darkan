@@ -215,9 +215,7 @@ public class PlayerBehaviour : MonoBehaviour {
 		message.Add("from", LoginGUI.userName);
 		message.Add("target", target);
 
-		pclient.request("area.areaHandler.move", message, (data) => {
-			
-		});
+		pclient.notify("area.areaHandler.move", message);
 	}
 
 	public void changeChannel(string newChannel){
@@ -227,8 +225,16 @@ public class PlayerBehaviour : MonoBehaviour {
 		JsonObject message = new JsonObject();
 		message.Add("area", area);
 
-		//pclient.notify("area.areaHandler.enterScene", message);
+		pclient.request("area.areaHandler.leaveScene", message, (data) => {
+			print(data);
+			LoginGUI.users = data;
+			UnityMainThreadDispatcher.Instance().Enqueue(changeArea(area)); 
+		});
+	}
 
+	public IEnumerator changeArea(string area) {
 		SceneManager.LoadScene (int.Parse(area));
+
+		yield return null;
 	}
 }

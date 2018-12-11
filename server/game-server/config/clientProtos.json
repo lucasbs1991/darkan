@@ -3,6 +3,10 @@
   	"required string area": 1
   },
 
+  "area.areaHandler.leaveScene": {
+  	"required string area": 1
+  },
+
   "area.areaHandler.move": {
     "required string rid": 1,
     "required string posx": 2,

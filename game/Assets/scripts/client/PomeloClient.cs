@@ -198,6 +198,11 @@ namespace Pomelo.DotNetClient
             eventManager.AddOnEvent(eventName, action);
         }
 
+        public void removeOn()
+        {
+            eventManager.RemoveOnEvent();
+        }
+
         internal void processMessage(Message msg)
         {
             if (msg.type == MessageType.MSG_RESPONSE)
