@@ -73,7 +73,7 @@ handler.enterScene = function(msg, session, next) {
 	}
 
 	console.log('enter channelService');
-	//console.log(channelService);
+	console.log(channelService);
 	//console.log(channel.getMember('Qwe*1'));
 
 	var users = channel.getMembers();
