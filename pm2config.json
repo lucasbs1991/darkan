@@ -1,0 +1,9 @@
+{
+  "apps": [{
+    "script" : "app.js",
+    "env": {
+      "NODE_ENV": "production",
+      "PORT": "8080"
+    }
+  }]
+}
