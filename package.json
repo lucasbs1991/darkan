@@ -7,6 +7,6 @@
     "pomelo": "2.2.x"
   },
   "scripts": {
-    "start": "pomelo start",
+    "start": "pomelo start"
   }
 }

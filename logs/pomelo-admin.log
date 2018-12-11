@@ -1,0 +1,15 @@
+[2018-12-11 20:11:05.221] [INFO] pomelo-admin - [32m[MqttServer] [39m[MqttServer] listen on 3005
+[2018-12-11 20:11:05.296] [INFO] pomelo-admin - [32m[ConsoleService] [39mtry to connect master: "master", "127.0.0.1", 3005
+[2018-12-11 20:11:07.003] [INFO] pomelo-admin - [32m[ConsoleService] [39mtry to connect master: "area", "127.0.0.1", 3005
+[2018-12-11 20:11:07.071] [INFO] pomelo-admin - [32m[ConsoleService] [39mtry to connect master: "area", "127.0.0.1", 3005
+[2018-12-11 20:11:07.102] [INFO] pomelo-admin - [32m[ConsoleService] [39mtry to connect master: "area", "127.0.0.1", 3005
+[2018-12-11 20:11:07.159] [INFO] pomelo-admin - [32m[ConsoleService] [39mtry to connect master: "chat", "127.0.0.1", 3005
+[2018-12-11 20:11:07.246] [INFO] pomelo-admin - [32m[ConsoleService] [39mtry to connect master: "area", "127.0.0.1", 3005
+[2018-12-11 20:11:07.313] [INFO] pomelo-admin - [32m[ConsoleService] [39mtry to connect master: "chat", "127.0.0.1", 3005
+[2018-12-11 20:11:07.378] [INFO] pomelo-admin - [32m[ConsoleService] [39mtry to connect master: "area", "127.0.0.1", 3005
+[2018-12-11 20:11:07.420] [INFO] pomelo-admin - [32m[ConsoleService] [39mtry to connect master: "area", "127.0.0.1", 3005
+[2018-12-11 20:11:07.471] [INFO] pomelo-admin - [32m[ConsoleService] [39mtry to connect master: "chat", "127.0.0.1", 3005
+[2018-12-11 20:11:07.504] [INFO] pomelo-admin - [32m[ConsoleService] [39mtry to connect master: "connector", "127.0.0.1", 3005
+[2018-12-11 20:11:07.625] [INFO] pomelo-admin - [32m[ConsoleService] [39mtry to connect master: "connector", "127.0.0.1", 3005
+[2018-12-11 20:11:07.643] [INFO] pomelo-admin - [32m[ConsoleService] [39mtry to connect master: "gate", "127.0.0.1", 3005
+[2018-12-11 20:11:07.672] [INFO] pomelo-admin - [32m[ConsoleService] [39mtry to connect master: "connector", "127.0.0.1", 3005
