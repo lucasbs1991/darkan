@@ -57,12 +57,17 @@ handler.leaveScene = function(msg, session, next) {
 };
 
 handler.enterScene = function(msg, session, next) {
+	var self = this;
+
 	var channelService = this.app.get('channelService');
+
+	//channelService.pushMessageByUids('onMonsters', {route: 'onMonsters', monsters: 'teste'}, {uid: session.uid, sid: session.frontendId}, errHandler);
 
 	channel = channelService.getChannel(msg.area, true);
 
 	var member = channel.getMember(session.uid);
 	if(!member){
+		// send message to all players on this channel
 		var param = {
 			route: 'onAdd',
 			user: session.get('playername')
@@ -72,9 +77,12 @@ handler.enterScene = function(msg, session, next) {
 		channel.add(session.uid, session.frontendId);
 	}
 
-	console.log('enter channelService');
-	console.log(channelService);
-	//console.log(channel.getMember('Qwe*1'));
+	//console.log('enter channelService');
+	//console.log(channelService);
+
+	var monsters = self.app.get('monsters');
+	//monsters[0].posx = 999;
+	//console.log(monsters[0]);
 
 	var users = channel.getMembers();
 	var data = [];
@@ -83,9 +91,10 @@ handler.enterScene = function(msg, session, next) {
 		user.uid = user.uid.split('*')[0];
 		data.push(user);
 	}
-	console.log(data);
+	//console.log(data);
 	next(null, {
-		users:data
+		users:data,
+		monsters:monsters
 	});
 };
 
@@ -147,3 +156,40 @@ handler.move = function(msg, session, next) {
 		route: msg.route
 	});
 };
+
+handler.monsterMove = function(msg, session, next) {
+	var rid = session.get('rid');
+	var serverId = session.frontendId;
+	var username = session.uid.split('*')[0];
+	var channelService = this.app.get('channelService');
+
+	channel = channelService.getChannel(rid, true);
+
+	var monsters = this.app.get('monsters');
+	var monster = monsters.find(x => x._id == msg.id);
+	monster.posx += parseInt(msg.posx);
+	monster.posy += parseInt(msg.posy);
+
+	var param = {
+		id: msg.id,
+		posx: msg.posx,
+		posy: msg.posy
+	};
+
+	// console.log('move channelService');
+	// console.log(channelService);
+	// console.log(channel.getMembers());
+
+	//the target is all users
+	if(msg.target != '*') {
+		channel.pushMessage('onMonsterMove', param);
+	}
+
+	return next();
+};
+
+function errHandler(err, fails){
+	if(!!err){
+		logger.error('Push Message error! %j', err.stack);
+	}
+}

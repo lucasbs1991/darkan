@@ -17,7 +17,7 @@ var ChatRemote = function(app) {
  *
  */
 ChatRemote.prototype.add = function(uid, sid, name, flag, cb) {
-	var channel = this.channelService.getChannel(name, flag);
+	var channel = this.channelService.getChannel('global', flag);
 
 	if( !! channel) {
 		channel.add(uid, sid);
@@ -56,7 +56,10 @@ ChatRemote.prototype.get = function(name, flag) {
  *
  */
 ChatRemote.prototype.kick = function(uid, sid, name, cb) {
-	var channel = this.channelService.getChannel(name, false);
+	var channel = this.channelService.getChannel('global', false);
+	//console.log(name);
+	//console.log(channel);
+	//console.log(this.channelService);
 	// leave channel
 	if( !! channel) {
 		channel.leave(uid, sid);

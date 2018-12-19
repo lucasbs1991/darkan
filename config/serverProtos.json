@@ -1,5 +1,11 @@
 {
-  "onMove": {
+  "onMonsterMove": {
+    "required string id": 1,
+    "required string posx": 2,
+    "required string posy": 3
+  },
+
+"onMove": {
     "required string posx": 1,
     "required string posy": 2,
     "required string dir": 3,

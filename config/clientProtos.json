@@ -1,4 +1,10 @@
 {
+  "area.areaHandler.monsterMove": {
+    "required string id": 1,
+    "required string posx": 2,
+    "required string posy": 3
+  },
+
   "area.areaHandler.enterScene": {
   	"required string area": 1
   },

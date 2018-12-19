@@ -2,5 +2,6 @@
   "onChat",
   "onAdd",
   "onLeave",
-  "onMove"
+  "onMove",
+  "onMonsterMove"
 ]

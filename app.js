@@ -1,5 +1,7 @@
 var pomelo = require('pomelo');
 var routeUtil = require('./app/util/routeUtil');
+var MongoClient = require('mongodb').MongoClient;
+var bcrypt = require('bcrypt-nodejs');
 /**
  * Init app for client.
  */
@@ -15,6 +17,29 @@ app.configure('production|development', 'connector', function(){
 			useDict : true,
 			useProtobuf : true
 		});
+});
+
+// Configure database
+app.configure('production|development', 'area|connector|master', async function() {
+    var database = await MongoClient.connect("mongodb://darkanadmin:darkan666@tatooine.mongodb.umbler.com:54170/darkan", { useNewUrlParser: true });
+
+    var db = await database.db('darkan');
+    var collection = await db.collection('users');
+    var dados = await collection.find({ name: "Lucas" }).toArray();
+    //console.log(dados);
+
+    var teste = bcrypt.compareSync('182512', dados[0].password);
+    //console.log(teste);
+});
+
+app.configure('production|development', 'area', async function(){
+	var database = await MongoClient.connect("mongodb://darkanadmin:darkan666@tatooine.mongodb.umbler.com:54170/darkan", { useNewUrlParser: true });
+
+    var db = await database.db('darkan');
+    var collection = await db.collection('monsters');
+    var monsters = await collection.find().toArray();
+    app.set('monsters', monsters);
+    //console.log(monsters);
 });
 
 app.configure('production|development', 'gate', function(){
