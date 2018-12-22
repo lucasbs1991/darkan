@@ -98,6 +98,26 @@ handler.enterScene = function(msg, session, next) {
 	});
 };
 
+handler.playerAtk = function(msg, session, next) {
+	var rid = session.get('rid');
+	var username = session.uid.split('*')[0];
+	var channelService = this.app.get('channelService');
+
+	channel = channelService.getChannel(rid, true);
+
+	// TODO - calculate the damage and send here
+
+	var param = {
+		from: username,
+		dir: msg.dir,
+		flip: msg.flip
+	};
+
+	channel.pushMessage('onAtk', param);
+
+	return next();
+}
+
 handler.move = function(msg, session, next) {
 	var rid = session.get('rid');
 	var serverId = session.frontendId;

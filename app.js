@@ -1,12 +1,14 @@
 var pomelo = require('pomelo');
 var routeUtil = require('./app/util/routeUtil');
 var MongoClient = require('mongodb').MongoClient;
-var bcrypt = require('bcrypt-nodejs');
 /**
  * Init app for client.
  */
 var app = pomelo.createApp();
 app.set('name', 'darkan');
+
+var userscollection;
+var monsterscollection;
 
 // app configuration
 app.configure('production|development', 'connector', function(){
@@ -24,11 +26,11 @@ app.configure('production|development', 'area|connector|master', async function(
     var database = await MongoClient.connect("mongodb://darkanadmin:darkan666@tatooine.mongodb.umbler.com:54170/darkan", { useNewUrlParser: true });
 
     var db = await database.db('darkan');
-    var collection = await db.collection('users');
-    var dados = await collection.find({ name: "Lucas" }).toArray();
+    this.userscollection = await db.collection('users');
+    var dados = await this.userscollection.find({ name: "Lucas" }).toArray();
     //console.log(dados);
 
-    var teste = bcrypt.compareSync('182512', dados[0].password);
+    //var teste = bcrypt.compareSync('182512', dados[0].password);
     //console.log(teste);
 });
 

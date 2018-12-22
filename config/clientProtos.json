@@ -13,6 +13,11 @@
   	"required string area": 1
   },
 
+  "area.areaHandler.playerAtk": {
+    "required string dir": 1,
+    "required string flip": 2
+  },
+
   "area.areaHandler.move": {
     "required string rid": 1,
     "required string posx": 2,
@@ -31,7 +36,8 @@
 
   "connector.entryHandler.enter": {
     "required string username": 1,
-    "required string rid": 2
+    "required string password": 2,
+    "required string rid": 3
   },
 
   "gate.gateHandler.queryEntry": {

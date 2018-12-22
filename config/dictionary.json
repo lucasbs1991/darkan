@@ -3,5 +3,6 @@
   "onAdd",
   "onLeave",
   "onMove",
+  "onAtk",
   "onMonsterMove"
 ]

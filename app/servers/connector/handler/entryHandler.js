@@ -1,3 +1,5 @@
+var bcrypt = require('bcrypt-nodejs');
+
 module.exports = function(app) {
 	return new Handler(app);
 };
@@ -16,9 +18,10 @@ var handler = Handler.prototype;
  * @param  {Function} next    next stemp callback
  * @return {Void}
  */
-handler.enter = function(msg, session, next) {
+handler.enter = async function(msg, session, next) {
 	var self = this;
 	var rid = msg.rid;
+	var password = msg.password;
 	var uid = msg.username + '*' + rid;
 	//var uid = msg.username + '*global';
 	var sessionService = self.app.get('sessionService');
@@ -32,20 +35,38 @@ handler.enter = function(msg, session, next) {
 		return;
 	}
 
-	session.bind(uid);
-	//session.set('serverId', self.app.get('areaIdMap')['1']); // player.areaId
-	session.set('rid', rid);
-	session.set('uid', uid);
-	session.set('playername', msg.username);
-	session.on('closed', onUserLeave.bind(null, self.app));
-	session.pushAll();
+	var dados = await self.app.userscollection.find({ account: msg.username }).toArray();
 
-	//put user into channel
-	self.app.rpc.chat.chatRemote.add(session, uid, self.app.get('serverId'), rid, true, function(users){
-		next(null, {
-			users:users
+    if(dados.length){
+	    if(bcrypt.compareSync(password, dados[0].password)){
+			session.bind(uid);
+			//session.set('serverId', self.app.get('areaIdMap')['1']); // player.areaId
+			session.set('rid', rid);
+			session.set('uid', uid);
+			session.set('playername', dados[0].username);
+			session.on('closed', onUserLeave.bind(null, self.app));
+			session.pushAll();
+
+			//put user into channel
+			self.app.rpc.chat.chatRemote.add(session, uid, self.app.get('serverId'), rid, true, function(users){
+				next(null, {
+					users:users
+				});
+			});
+	    } else{
+			next(null, {
+				code: 500,
+				error: true
+			});
+			return;
+	    }
+    } else{
+    	next(null, {
+			code: 500,
+			error: true
 		});
-	});
+		return;
+    }
 };
 
 /**

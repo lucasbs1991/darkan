@@ -5,12 +5,18 @@
     "required string posy": 3
   },
 
-"onMove": {
+  "onMove": {
     "required string posx": 1,
     "required string posy": 2,
     "required string dir": 3,
     "required string from": 4,
     "required string target": 5
+  },
+
+  "onAtk": {
+    "required string from": 1,
+    "required string dir": 2,
+    "required string flip": 3
   },
 
   "onChat": {
